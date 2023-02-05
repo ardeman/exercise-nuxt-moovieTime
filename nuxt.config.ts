@@ -2,5 +2,10 @@
 export default defineNuxtConfig({
     typescript: {
         shim: false
+    },
+    app: {
+        head: {
+            title: 'MoovieTime',
+        }
     }
 })
