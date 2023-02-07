@@ -79,7 +79,7 @@
                                     </div>
                                 </div>
                                 <div class="h-[160px] line-clamp-[8]">
-                                    <p>{{ review.content }}</p>
+                                    <p class="whitespace-pre-line">{{ review.content }}</p>
                                 </div>
                             </div>
                         </template>
