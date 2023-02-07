@@ -3,10 +3,10 @@
         <div class="relative">
             <Navbar />
             <div class="pt-[74px]">
-                <slot></slot>
+                <slot />
             </div>
         </div>
-        <Footer></Footer>
+        <Footer />
     </div>
 </template>
 

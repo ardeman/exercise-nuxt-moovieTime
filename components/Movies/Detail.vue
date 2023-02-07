@@ -62,7 +62,7 @@
                                 <div class="mb-6 flex justify-between">
                                     <div class="flex gap-4 items-center">
                                         <img 
-                                            :src="review.author_details.avatar_path.substr(0,4) === '/htt' ? review.author_details.avatar_path.substring(1) : 'https://image.tmdb.org/t/p/original' + review.author_details.avatar_path" 
+                                            :src="review.author_details.avatar_path?.substr(0,4) === '/htt' ? review.author_details.avatar_path.substring(1) : 'https://image.tmdb.org/t/p/original' + review.author_details.avatar_path" 
                                             alt="Avatar" 
                                             class="h-12 w-12 rounded-full bg-[rgba(30,35,43,0.21)]"
                                         >
