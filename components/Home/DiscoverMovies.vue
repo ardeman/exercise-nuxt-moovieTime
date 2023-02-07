@@ -21,7 +21,7 @@
                                         class="w-[32px]">
                                     <span>{{ movie.vote_average?.toFixed(1) }}</span>
                                 </p>
-                                <p class="text-center px-3 text-lg">{{ movie?.genre_ids?.map(genre => categories?.genres?.find(category => genre === category.id)?.name)?.join(', ') }}</p>
+                                <p class="text-center px-3 text-lg" v-text="movie?.genre_ids?.map(genre => categories?.genres?.find(category => genre === category.id)?.name)?.join(', ')"></p>
                                 <button class="text-sm py-2 px-8 bg-[#FF0000] rounded-[32px]">VIEW</button>
                             </div>
                             <img :src="'https://image.tmdb.org/t/p/original' + movie.poster_path" :alt="movie.title">

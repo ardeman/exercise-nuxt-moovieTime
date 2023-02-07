@@ -25,7 +25,7 @@
                                 <div id="dropdown" class="w-full z-10 hidden bg-[#111419] rounded-lg shadow">
                                     <ul class="py-2 text-[13px] text-white" aria-labelledby="dropdownDefaultButton">
                                         <li v-for="item in sortBy">
-                                            <a href="#" class="block px-4 py-2 hover:bg-black">{{item}}</a>
+                                            <a href="#" class="block px-4 py-2 hover:bg-black">{{ item }}</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -57,10 +57,7 @@
                                                 class="w-[32px]">
                                             <span>{{ movie.vote_average?.toFixed(1) }}</span>
                                         </p>
-                                        <p class="text-center px-3 text-lg">{{
-                                            movie?.genre_ids?.map(genre =>
-                                                categories?.genres?.find(category => genre === category.id)?.name)?.join(', ')
-                                        }}</p>
+                                        <p class="text-center px-3 text-lg" v-text="movie?.genre_ids?.map(genre => categories?.genres?.find(category => genre === category.id)?.name)?.join(', ')"></p>
                                         <button class="text-sm py-2 px-8 bg-[#FF0000] rounded-[32px]">VIEW</button>
                                     </div>
                                     <img :src="'https://image.tmdb.org/t/p/original' + movie.poster_path"
