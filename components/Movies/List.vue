@@ -1,7 +1,7 @@
 <template>
     <section class="relative">
         <div class="absolute w-full h-80 bg-[rgba(255,255,255,0.05)]"></div>
-        <div class="relative max-w-[1200px] m-auto pt-24 pb-28 text-[#E5E5E5]">
+        <div class="relative max-w-[1200px] m-auto pt-14 pb-28 text-[#E5E5E5]">
             <CommonTitle class="mb-14">
                 <span class="text-4xl">Movies</span>
             </CommonTitle>
