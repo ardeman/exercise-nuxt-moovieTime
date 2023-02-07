@@ -58,7 +58,7 @@
                     <p class="text-[#FF0000] font-semibold">REVIEWS</p>
                     <div class="grid grid-cols-2 grid-rows-1 gap-8">
                         <template v-for="(review, index) in reviews.results">
-                            <div v-if="index < 2" class="bg-[#F9F9F9] p-6 rounded-[14px]" :key="index">
+                            <div v-if="index < 2" class="bg-[#F9F9F9] p-6 rounded-[14px]">
                                 <div class="mb-6 flex justify-between">
                                     <div class="flex gap-4 items-center">
                                         <img 
@@ -76,7 +76,7 @@
                                         <p class="font-semibold text-4xl">{{ review?.author_details?.rating?.toFixed(1) }}</p>
                                     </div>
                                 </div>
-                                <div class="h-[166px] overflow-hidden">
+                                <div class="h-[160px] line-clamp-[8]">
                                     <p>{{ review.content }}</p>
                                 </div>
                             </div>
