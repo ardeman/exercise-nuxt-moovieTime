@@ -54,7 +54,7 @@
                     <p class="text-[#FF0000] font-semibold">OVERVIEW</p>
                     <p>{{ details.overview }}</p>
                 </div>
-                <div class="grid w-[1200px] mx-auto mt-11 text-sm gap-2">
+                <div class="grid w-[1200px] mx-auto mt-11 text-sm gap-6">
                     <p class="text-[#FF0000] font-semibold">REVIEWS</p>
                     <div class="grid grid-cols-2 grid-rows-1 gap-8">
                         <template v-for="(review, index) in reviews.results">
@@ -87,7 +87,7 @@
         </div>
         <div class="relative text-white bg-[#1E232B] pt-12 pb-12">
             <div class="w-screen">
-                <div class="grid w-[1200px] mx-auto text-sm gap-2">
+                <div class="grid w-[1200px] mx-auto text-sm gap-9">
                     <p>RECOMMENDATION MOVIES</p>
                     <div class="grid grid-cols-5 gap-[25px]">
                         <template v-for="(movie, index) in recommendations.results">
