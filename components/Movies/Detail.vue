@@ -5,7 +5,7 @@
             <div class="w-screen h-full absolute bottom-[-100px] z-20">
                 <div class="h-full flex items-end w-[1200px] mx-auto">
                     <img :src="'https://image.tmdb.org/t/p/original' + details.poster_path" alt="Poster"
-                        class="w-[220px]">
+                        class="w-[220px] drop-shadow-[0px_5px_10px_rgba(0,0,0,0.25)]">
                 </div>
             </div>
             <div class="w-screen h-full flex">
@@ -58,14 +58,16 @@
                     <p class="text-[#FF0000] font-semibold">REVIEWS</p>
                     <div class="grid grid-cols-2 grid-rows-1 gap-8">
                         <template v-for="(review, index) in reviews.results">
-                            <div v-if="index < 2" class="bg-[#F9F9F9] p-6 rounded-[14px]">
+                            <div v-if="index < 2" class="bg-[#F9F9F9] shadow-[0px_4px_4px_rgba(0,0,0,0.1)] p-6 rounded-[14px]">
                                 <div class="mb-6 flex justify-between">
                                     <div class="flex gap-4 items-center">
                                         <img 
+                                            v-if="review.author_details.avatar_path"
                                             :src="review.author_details.avatar_path?.substr(0,4) === '/htt' ? review.author_details.avatar_path.substring(1) : 'https://image.tmdb.org/t/p/original' + review.author_details.avatar_path" 
                                             alt="Avatar" 
                                             class="h-12 w-12 rounded-full bg-[rgba(30,35,43,0.21)]"
                                         >
+                                        <span v-else class="h-12 w-12 rounded-full bg-[rgba(30,35,43,0.21)]"></span>
                                         <div>
                                             <p class="font-bold text-sm">{{ review.author }}</p>
                                             <p class="text-xs">{{ review.updated_at }}</p>
