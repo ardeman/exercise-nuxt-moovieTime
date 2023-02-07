@@ -1,5 +1,5 @@
 <template>
-    <div class="pt-14 pb-12">
+    <section class="pt-14 pb-12">
         <div class="flex justify-between gap-8 mx-[-145px]">
             <div :class="'bg-black w-[520px] h-[328px] flex gap-6 ' + (item.active ? 'opacity-100' : 'opacity-50')" v-for="item in data">
                 <img :src="item.img" alt="News World" class="my-[-20px] ml-[-20px]">
@@ -23,7 +23,7 @@
             <div class="w-[12px] h-[12px] rounded-[6px] bg-[rgba(255,255,255,0.5)]"></div>
             <div class="w-[12px] h-[12px] rounded-[6px] bg-[rgba(255,255,255,0.5)]"></div>
         </div>
-    </div>
+    </section>
 </template>
 
 <script setup>

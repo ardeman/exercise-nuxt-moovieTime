@@ -1,6 +1,4 @@
 <template>
-    <div>
-        <HomeCarousel />
-        <HomeDiscoverMovies />
-    </div>
+    <HomeCarousel />
+    <HomeDiscoverMovies />
 </template>

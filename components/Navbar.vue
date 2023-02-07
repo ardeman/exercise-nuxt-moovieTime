@@ -53,15 +53,6 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
-import {
-    initDropdowns,
-} from 'flowbite'
-
-onMounted(() => {
-    initDropdowns();
-})
-
 const { categories, setCategories } = useCategories()
 const appConfig = useAppConfig()
 
