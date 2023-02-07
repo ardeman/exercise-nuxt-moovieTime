@@ -72,7 +72,7 @@
                                         </div>
                                     </div>
                                     <div class="bg-[rgba(196,196,196,0.28)] px-4 py-1 rounded-md flex justify-start gap-1">
-                                        <img src="/images/star.svg" alt="Rating" class="w-[17px] h-[17px]">
+                                        <img src="/images/star.svg" alt="Rating" class="w-[17px] h-[17px] mt-1">
                                         <p class="font-semibold text-4xl">{{ review?.author_details?.rating?.toFixed(1) }}</p>
                                     </div>
                                 </div>
