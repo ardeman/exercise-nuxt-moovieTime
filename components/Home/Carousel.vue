@@ -7,7 +7,7 @@
                     <p class="flex gap-1.5 text-lg font-bold"><img src="/images/star.svg" alt="Rating" class="w-[16px]">
                         <span>{{ item.rating }}</span>
                     </p>
-                    <h3 class="text-3xl font-medium">{{ item.title }}</h3>
+                    <h3 class="text-3xl font-semibold">{{ item.title }}</h3>
                     <div class="flex gap-1.5 items-center py-3">
                         <span>{{ item.year }}</span>
                         <div class="w-[7px] h-[7px] rounded-full bg-[rgba(255,255,255,0.5)]"></div>

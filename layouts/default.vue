@@ -1,10 +1,12 @@
 <template>
-    <div class="bg-[#1E232B] text-white min-h-screen flex flex-col justify-between">
-        <div>
+    <div class="bg-[#1E232B] text-white min-h-screen flex flex-col justify-between relative">
+        <div class="relative">
             <Navbar />
-            <slot />
+            <div class="pt-[74px]">
+                <slot></slot>
+            </div>
         </div>
-        <Footer />
+        <Footer></Footer>
     </div>
 </template>
 

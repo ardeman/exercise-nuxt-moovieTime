@@ -1,6 +1,6 @@
 <template>
-    <header class="bg-[rgba(255,255,255,0.05)] py-[15px]">
-        <nav class="max-w-[1200px] m-auto flex justify-between items-center">
+    <header class="bg-[rgba(255,255,255,0.05)] py-[15px] absolute z-50 w-screen">
+        <nav class="w-[1200px] m-auto flex justify-between items-center">
             <NuxtLink to="/">
                 <img src="/images/logo.svg" alt="MoovieTime">
             </NuxtLink>
@@ -21,13 +21,15 @@
                     <li v-for="result in search?.results">
                         <NuxtLink
                             class="text-[#E5E5E5] bg-transparent hover:bg-[#1E232B] text-sm py-2 px-4 font-normal block w-full whitespace-nowrap"
-                            :to="'/movies/' + result.id">
-                            {{ result.title || result.name }}
+                            :to="'/movies/' + result.id"
+                            @click="resetQuery"
+                            >
+                            {{ result.title }}
                         </NuxtLink>
                     </li>
                 </ul>
             </form>
-            <div class="flex gap-[40px] font-medium">
+            <div class="flex gap-[40px] font-semibold">
                 <button class="flex gap-[11px] items-center text-[#E5E5E5]" id="dropdownHoverButton"
                     data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover">
                     <img src="/images/view-grid.svg" alt="View">
@@ -35,8 +37,8 @@
                 </button>
                 <div id="dropdownHover"
                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-[6px] shadow-[0px_4px_4px_rgba(0,0,0,0.5)] w-[153px]">
-                    <ul class="py-2 text-xs text-[#1E232B] font-medium" aria-labelledby="dropdownHoverButton">
-                        <li v-for="genre in categories.genres">
+                    <ul class="py-2 text-xs text-[#1E232B] font-semibold" aria-labelledby="dropdownHoverButton">
+                        <li v-for="genre in categories?.genres">
                             <NuxtLink :to="'/movies?category=' + genre.id"
                                 class="block px-4 py-2 hover:bg-gray-100 uppercase">
                                 {{ genre.name }}
@@ -57,6 +59,7 @@ const { categories, setCategories } = useCategories()
 const appConfig = useAppConfig()
 
 const query = useState('query', () => '')
+const resetQuery = () => { query.value = '' }
 const { data: search, error } = await useAsyncData(
     'search',
     () => $fetch(`/search/movie`, {
@@ -81,7 +84,7 @@ const { data: genres } = useAsyncData(
             method: 'GET',
             baseURL: 'https://api.themoviedb.org/3',
             params: {
-                api_key: '6aa115232d92dbaf630a6078909d926d'
+                api_key: appConfig.apiKey.tmdb
             }
         }))
         setCategories(response)
