@@ -28,7 +28,7 @@
                 </ul>
             </form>
             <div class="flex gap-[40px] font-medium">
-                <button class="flex gap-[11px] items-center" id="dropdownHoverButton"
+                <button class="flex gap-[11px] items-center text-[#E5E5E5]" id="dropdownHoverButton"
                     data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover">
                     <img src="/images/view-grid.svg" alt="View">
                     CATEGORIES
@@ -44,9 +44,9 @@
                         </li>
                     </ul>
                 </div>
-                <NuxtLink to="/movies">MOVIES</NuxtLink>
-                <button>TV SHOWS</button>
-                <button>LOGIN</button>
+                <NuxtLink to="/movies" class="text-[#E5E5E5]">MOVIES</NuxtLink>
+                <button class="text-[#E5E5E5]">TV SHOWS</button>
+                <button class="text-[#E5E5E5]">LOGIN</button>
             </div>
         </nav>
     </header>
@@ -62,7 +62,7 @@ onMounted(() => {
     initDropdowns();
 })
 
-const categories = useCategories()
+const { categories, setCategories } = useCategories()
 const appConfig = useAppConfig()
 
 const query = useState('query', () => '')
@@ -81,5 +81,19 @@ const { data: search, error } = await useAsyncData(
         query
     ]
 }
+)
+
+const { data: genres } = useAsyncData(
+    'genres',
+    async () => {
+        const response = (await $fetch(`/genre/movie/list`, {
+            method: 'GET',
+            baseURL: 'https://api.themoviedb.org/3',
+            params: {
+                api_key: '6aa115232d92dbaf630a6078909d926d'
+            }
+        }))
+        setCategories(response)
+    }
 )
 </script>
