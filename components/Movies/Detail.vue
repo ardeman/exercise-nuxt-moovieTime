@@ -1,5 +1,5 @@
 <template>
-    <section class="z-0">
+    <section class="z-0 mt-[-74px]">
         <div class="relative h-[468px] flex flex-col">
             <img :src="'https://image.tmdb.org/t/p/original' + details.backdrop_path" alt="Backdrop" class="h-full w-screen absolute object-cover opacity-20">
             <div class="w-screen h-full absolute bottom-[-100px] z-20">
