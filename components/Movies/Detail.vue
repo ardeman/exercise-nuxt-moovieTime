@@ -57,7 +57,7 @@
                 <div class="grid w-[1200px] mx-auto mt-11 text-sm gap-2">
                     <p class="text-[#FF0000] font-semibold">REVIEWS</p>
                     <div class="grid grid-cols-2 grid-rows-1 gap-8">
-                        <div v-for="(review, index) in reviews.results">
+                        <template v-for="(review, index) in reviews.results">
                             <div v-if="index < 2" class="bg-[#F9F9F9] p-6 rounded-[14px]" :key="index">
                                 <div class="mb-6 flex justify-between">
                                     <div class="flex gap-4 items-center">
@@ -80,8 +80,7 @@
                                     <p>{{ review.content }}</p>
                                 </div>
                             </div>
-                            <div v-else class="hidden"></div>
-                        </div>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -91,7 +90,7 @@
                 <div class="grid w-[1200px] mx-auto text-sm gap-2">
                     <p>RECOMMENDATION MOVIES</p>
                     <div class="grid grid-cols-5 gap-[25px]">
-                        <div v-for="(movie, index) in recommendations.results">
+                        <template v-for="(movie, index) in recommendations.results">
                             <NuxtLink :to="'/movies/' + movie.id" v-if="index < 5" class="text-[#E5E5E5]">
                                 <div class="relative bg-[rgba(255,255,255,0.1)">
                                     <div class="absolute top-0 right-0 text-lg font-bold px-2.5 py-1.5 bg-[rgba(30,35,43,0.8)]">{{ movie.vote_average?.toFixed(1) }}</div>
@@ -108,7 +107,7 @@
                                 <p class="mt-3 mb-1 font-semibold">{{ movie.title }}</p>
                                 <p class="text-[#929292] text-sm">{{ movie.release_date.substr(0, 4) }}</p>
                             </NuxtLink>
-                        </div>
+                        </template>
                     </div>
                 </div>
             </div>

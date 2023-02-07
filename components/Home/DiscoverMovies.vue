@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="grid grid-cols-5 gap-[25px]">
-                <div v-for="(movie, index) in popular.results">
+                <template v-for="(movie, index) in popular.results">
                     <NuxtLink :to="'/movies/' + movie.id" v-if="index < 10" class="text-[#E5E5E5]">
                         <div class="relative bg-[rgba(255,255,255,0.1)">
                             <div class="absolute top-0 right-0 text-lg font-bold px-2.5 py-1.5 bg-[rgba(30,35,43,0.8)]">{{ movie.vote_average?.toFixed(1) }}</div>
@@ -29,7 +29,7 @@
                         <p class="mt-3 mb-1 font-semibold">{{ movie.title }}</p>
                         <p class="text-[#929292] text-sm">{{ movie.release_date.substr(0, 4) }}</p>
                     </NuxtLink>
-                </div>
+                </template>
             </div>
         </div>
     </section>
