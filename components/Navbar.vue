@@ -67,7 +67,7 @@ const { data: search, error } = await useAsyncData(
         baseURL: 'https://api.themoviedb.org/3',
         params: {
             api_key: appConfig.apiKey.tmdb,
-            query: query?.value,
+            query: query?.value || ' ',
             page: 1
         }
     }), {

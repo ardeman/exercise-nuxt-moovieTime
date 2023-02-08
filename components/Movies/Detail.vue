@@ -9,7 +9,7 @@
             <div class="w-screen h-full flex">
                 <div class="flex items-end w-[1200px] mx-auto">
                     <div class="pl-[253px] pb-8 w-full">
-                        <p class="text-lg">{{ details?.release_date?.substr(0, 4) }}</p>
+                        <p class="text-lg">{{ details?.release_date?.substring(0, 4) }}</p>
                         <p class="text-4xl font-semibold">{{ details?.title }}</p>
                         <p class="text-sm mt-1">{{ details?.genres?.map(genres => genres?.name)?.join(', ') }}</p>
                     </div>
@@ -18,7 +18,7 @@
             <div class="w-screen h-fit bg-[rgba(0,0,0,0.5)] flex-shrink-0">
                 <div class="w-[1200px] m-auto relative">
                     <img :src="'https://image.tmdb.org/t/p/original' + details.poster_path" alt="Poster"
-                        class="w-[220px] drop-shadow-[0px_5px_10px_rgba(0,0,0,0.25)] absolute top-5 translate-y-[-50%] z-20">
+                        class="w-[220px] drop-shadow-[0px_5px_10px_rgba(0,0,0,0.25)] absolute top-7 translate-y-[-50%] z-20">
                     <div class="flex gap-3 pl-[253px] py-[20px]">
                         <div class="flex gap-4 items-center flex-shrink-0">
                             <img src="/images/star.svg" alt="Rating" class="w-[32px] h-[32px]">
@@ -65,7 +65,7 @@
                                     <div class="flex gap-4 items-center">
                                         <img 
                                             v-if="review.author_details.avatar_path"
-                                            :src="review.author_details.avatar_path?.substr(0,4) === '/htt' ? review.author_details.avatar_path.substring(1) : 'https://image.tmdb.org/t/p/original' + review.author_details.avatar_path" 
+                                            :src="review.author_details.avatar_path?.substring(0,4) === '/htt' ? review.author_details.avatar_path.substring(1) : 'https://image.tmdb.org/t/p/original' + review.author_details.avatar_path" 
                                             alt="Avatar" 
                                             class="h-12 w-12 rounded-full bg-[rgba(30,35,43,0.21)]"
                                         >
@@ -109,7 +109,7 @@
                                     <img :src="'https://image.tmdb.org/t/p/original' + movie.poster_path" :alt="movie.title">
                                 </div>
                                 <p class="mt-3 mb-1 font-semibold">{{ movie.title }}</p>
-                                <p class="text-[#929292] text-sm">{{ movie.release_date.substr(0, 4) }}</p>
+                                <p class="text-[#929292] text-sm">{{ movie.release_date.substring(0, 4) }}</p>
                             </NuxtLink>
                         </template>
                     </div>

@@ -27,7 +27,7 @@
                             <img :src="'https://image.tmdb.org/t/p/original' + movie.poster_path" :alt="movie.title">
                         </div>
                         <p class="mt-3 mb-1 font-semibold">{{ movie.title }}</p>
-                        <p class="text-[#929292] text-sm">{{ movie.release_date.substr(0, 4) }}</p>
+                        <p class="text-[#929292] text-sm">{{ movie.release_date.substring(0, 4) }}</p>
                     </NuxtLink>
                 </template>
             </div>
