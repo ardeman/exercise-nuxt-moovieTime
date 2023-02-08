@@ -1,7 +1,6 @@
 <template>
     <section class="z-0 mt-[-74px]">
-        <div class="relative h-[468px] flex flex-col">
-            <img :src="'https://image.tmdb.org/t/p/original' + details.backdrop_path" alt="Backdrop" class="h-full w-screen absolute object-cover opacity-20">
+        <div class="relative h-[468px] flex flex-col bg-cover bg-center bg-opacity-20" :style="{ backgroundImage: 'linear-gradient(rgba(30, 35, 43, 0.8), rgba(30, 35, 43, 0.8)), url(https://image.tmdb.org/t/p/original' + details.backdrop_path + ')' }">
             <div class="w-screen h-full absolute bottom-[-100px] z-20">
                 <div class="h-full flex items-end w-[1200px] mx-auto">
                     <img :src="'https://image.tmdb.org/t/p/original' + details.poster_path" alt="Poster"
