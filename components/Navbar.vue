@@ -55,7 +55,7 @@
 </template>
 
 <script setup>
-const { categories, setCategories } = useCategories()
+const { categories } = useCategories()
 const appConfig = useAppConfig()
 
 const query = useState('query', () => '')
@@ -75,19 +75,5 @@ const { data: search, error } = await useAsyncData(
         query
     ]
 }
-)
-
-const { data: genres } = useAsyncData(
-    'genres',
-    async () => {
-        const response = (await $fetch(`/genre/movie/list`, {
-            method: 'GET',
-            baseURL: 'https://api.themoviedb.org/3',
-            params: {
-                api_key: appConfig.apiKey.tmdb
-            }
-        }))
-        setCategories(response)
-    }
 )
 </script>

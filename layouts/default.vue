@@ -40,4 +40,21 @@ onMounted(() => {
     // initTabs();
     // initTooltips();
 })
+
+const appConfig = useAppConfig()
+const { setCategories } = useCategories()
+
+const { data: genres } = useAsyncData(
+    'genres',
+    async () => {
+        const response = (await $fetch(`/genre/movie/list`, {
+            method: 'GET',
+            baseURL: 'https://api.themoviedb.org/3',
+            params: {
+                api_key: appConfig.apiKey.tmdb
+            }
+        }))
+        setCategories(response)
+    }
+)
 </script>
