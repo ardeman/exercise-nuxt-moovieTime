@@ -46,26 +46,14 @@
                 <div>
                     <div class="grid grid-cols-4 gap-[25px]">
                         <div v-for="movie in popular.results">
-                            <NuxtLink :to="'/movies/' + movie.id" class="text-[#E5E5E5]">
-                                <div class="relative bg-[rgba(255,255,255,0.1)">
-                                    <div
-                                        class="absolute top-0 right-0 text-lg font-bold px-2.5 py-1.5 bg-[rgba(30,35,43,0.8)]">
-                                        {{ movie.vote_average?.toFixed(1) }}</div>
-                                    <div
-                                        class="w-full h-full absolute bg-[rgba(0,0,0,0.8)] hover:opacity-100 opacity-0 flex flex-col items-center justify-center gap-11 font-semibold">
-                                        <p class="flex gap-2.5 text-2xl"><img src="/images/star.svg" alt="Rating"
-                                                class="w-[32px]">
-                                            <span>{{ movie.vote_average?.toFixed(1) }}</span>
-                                        </p>
-                                        <p class="text-center px-3 text-lg" v-text="movie?.genre_ids?.map(genre => categories?.genres?.find(category => genre === category.id)?.name)?.join(', ')"></p>
-                                        <button class="text-sm py-2 px-8 bg-[#FF0000] rounded-[32px]">VIEW</button>
-                                    </div>
-                                    <img :src="'https://image.tmdb.org/t/p/original' + movie.poster_path"
-                                        :alt="movie.title">
-                                </div>
-                                <p class="mt-3 mb-1 font-semibold">{{ movie.title }}</p>
-                                <p class="text-[#929292] text-sm">{{ movie.release_date.substring(0, 4) }}</p>
-                            </NuxtLink>
+                            <CommonPoster
+                                :url="'/movies/' + movie.id"
+                                :rate="movie.vote_average?.toFixed(1)"
+                                :genres="movie?.genre_ids?.map(genre => categories?.genres?.find(category => genre === category.id)?.name)?.join(', ')"
+                                :poster-url="'https://image.tmdb.org/t/p/original' + movie.poster_path"
+                                :title="movie.title"
+                                :release-year="movie.release_date.substring(0, 4)"
+                            />
                         </div>
                     </div>
 

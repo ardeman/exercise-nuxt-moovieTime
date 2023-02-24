@@ -60,30 +60,10 @@
                     <p class="text-[#FF0000] font-semibold">REVIEWS</p>
                     <div class="grid grid-cols-2 grid-rows-1 gap-8">
                         <template v-for="(review, index) in reviews.results">
-                            <div v-if="index < 2" class="bg-[#F9F9F9] shadow-[0px_4px_4px_rgba(0,0,0,0.1)] p-6 rounded-[14px]">
-                                <div class="mb-6 flex justify-between">
-                                    <div class="flex gap-4 items-center">
-                                        <img 
-                                            v-if="review.author_details.avatar_path"
-                                            :src="review.author_details.avatar_path?.substring(0,4) === '/htt' ? review.author_details.avatar_path.substring(1) : 'https://image.tmdb.org/t/p/original' + review.author_details.avatar_path" 
-                                            alt="Avatar" 
-                                            class="h-12 w-12 rounded-full bg-[rgba(30,35,43,0.21)]"
-                                        >
-                                        <span v-else class="h-12 w-12 rounded-full bg-[rgba(30,35,43,0.21)]"></span>
-                                        <div>
-                                            <p class="font-bold text-sm">{{ review.author }}</p>
-                                            <p class="text-xs">{{ review.updated_at }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="bg-[rgba(196,196,196,0.28)] px-4 py-1 rounded-md flex justify-start gap-1">
-                                        <img src="/images/star.svg" alt="Rating" class="w-[17px] h-[17px] mt-1">
-                                        <p class="font-semibold text-4xl">{{ review?.author_details?.rating?.toFixed(1) }}</p>
-                                    </div>
-                                </div>
-                                <div class="h-[160px] line-clamp-[8]">
-                                    <p class="whitespace-pre-line" v-text="review.content"></p>
-                                </div>
-                            </div>
+                            <CommonReview
+                                v-if="index < 2"
+                                :review="review"
+                            />
                         </template>
                     </div>
                 </div>
@@ -95,22 +75,15 @@
                     <p>RECOMMENDATION MOVIES</p>
                     <div class="grid grid-cols-5 gap-[25px]">
                         <template v-for="(movie, index) in recommendations.results">
-                            <NuxtLink :to="'/movies/' + movie.id" v-if="index < 5" class="text-[#E5E5E5]">
-                                <div class="relative bg-[rgba(255,255,255,0.1)">
-                                    <div class="absolute top-0 right-0 text-lg font-bold px-2.5 py-1.5 bg-[rgba(30,35,43,0.8)]">{{ movie.vote_average?.toFixed(1) }}</div>
-                                    <div class="w-full h-full absolute bg-[rgba(0,0,0,0.8)] hover:opacity-100 opacity-0 flex flex-col items-center justify-center gap-11 font-semibold">
-                                        <p class="flex gap-2.5 text-2xl"><img src="/images/star.svg" alt="Rating"
-                                                class="w-[32px]">
-                                            <span>{{ movie.vote_average?.toFixed(1) }}</span>
-                                        </p>
-                                        <p class="text-center px-3 text-lg" v-text="movie?.genre_ids?.map(genre => categories?.genres?.find(category => genre === category.id)?.name)?.join(', ')"></p>
-                                        <button class="text-sm py-2 px-8 bg-[#FF0000] rounded-[32px]">VIEW</button>
-                                    </div>
-                                    <img :src="'https://image.tmdb.org/t/p/original' + movie.poster_path" :alt="movie.title">
-                                </div>
-                                <p class="mt-3 mb-1 font-semibold">{{ movie.title }}</p>
-                                <p class="text-[#929292] text-sm">{{ movie.release_date.substring(0, 4) }}</p>
-                            </NuxtLink>
+                            <CommonPoster
+                                v-if="index < 5"
+                                :url="'/movies/' + movie.id"
+                                :rate="movie.vote_average?.toFixed(1)"
+                                :genres="movie?.genre_ids?.map(genre => categories?.genres?.find(category => genre === category.id)?.name)?.join(', ')"
+                                :poster-url="'https://image.tmdb.org/t/p/original' + movie.poster_path"
+                                :title="movie.title"
+                                :release-year="movie.release_date.substring(0, 4)"
+                            />
                         </template>
                     </div>
                 </div>
