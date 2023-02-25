@@ -35,7 +35,7 @@
                             </div>
                             <div class="mr-6 pr-6 border-r border-[rgba(255,255,255,0.2)] flex-shrink-0">
                                 <p class="text-[rgba(255,255,255,0.5)]">LANGUAGE</p>
-                                <p class="uppercase">{{ details.original_language }}</p>
+                                <p class="uppercase">{{ details.spoken_languages?.find(spoken => spoken.iso_639_1 === details.original_language )?.english_name }}</p>
                             </div>
                             <div class="mr-6 pr-6 border-r border-[rgba(255,255,255,0.2)] flex-shrink-0">
                                 <p class="text-[rgba(255,255,255,0.5)]">BUDGET</p>
