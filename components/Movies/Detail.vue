@@ -69,7 +69,7 @@
                 </div>
             </div>
         </div>
-        <div class="relative text-white bg-[#1E232B] pt-12 pb-12">
+        <div class="relative text-white bg-[#1E232B] pt-12 pb-12" v-if="recommendations.results.length > 0">
             <div class="w-screen">
                 <div class="grid w-[1200px] mx-auto text-sm gap-9">
                     <p>RECOMMENDATION MOVIES</p>
