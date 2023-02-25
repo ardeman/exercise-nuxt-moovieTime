@@ -18,8 +18,9 @@
                 </div>
                 <ul id="dropdownResult" v-show="search?.results?.length > 0"
                     class="bg-[rgba(0,0,0,0.9)] rounded-[0px_0px_8px_8px] absolute w-full z-50 list-none py-[18px]">
-                    <li v-for="result in search?.results">
+                    <li v-for="(result, index) in search?.results">
                         <NuxtLink
+                            v-if="index < 8"
                             class="text-[#E5E5E5] bg-transparent hover:bg-[#1E232B] text-sm py-2 px-4 font-normal block w-full whitespace-nowrap"
                             :to="'/movies/' + result.id"
                             @click="resetQuery"
