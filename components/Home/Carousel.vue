@@ -4,13 +4,13 @@
             <template v-for="(item, index) in nowPlaying.results">
                 <template v-if="index === active">
                     <CommonCarouselCard
-                        :url="'/movies/' + nowPlaying.results[(index || nowPlaying.results.length)-1].id"
-                        :rate="nowPlaying.results[(index || nowPlaying.results.length)-1].vote_average?.toFixed(1)"
-                        :genres="nowPlaying.results[(index || nowPlaying.results.length)-1]?.genre_ids?.map(genre => categories?.genres?.find(category => genre === category.id)?.name)[0]"
-                        :poster-url="'https://image.tmdb.org/t/p/original' + nowPlaying.results[(index || nowPlaying.results.length)-1].poster_path"
-                        :title="nowPlaying.results[(index || nowPlaying.results.length)-1].title"
-                        :release-year="nowPlaying.results[(index || nowPlaying.results.length)-1].release_date.substring(0, 4)"
-                        :overview="nowPlaying.results[(index || nowPlaying.results.length)-1].overview"
+                        :url="'/movies/' + nowPlaying.results[(index || maxShows)-1].id"
+                        :rate="nowPlaying.results[(index || maxShows)-1].vote_average?.toFixed(1)"
+                        :genres="nowPlaying.results[(index || maxShows)-1]?.genre_ids?.map(genre => categories?.genres?.find(category => genre === category.id)?.name)[0]"
+                        :poster-url="'https://image.tmdb.org/t/p/original' + nowPlaying.results[(index || maxShows)-1].poster_path"
+                        :title="nowPlaying.results[(index || maxShows)-1].title"
+                        :release-year="nowPlaying.results[(index || maxShows)-1].release_date.substring(0, 4)"
+                        :overview="nowPlaying.results[(index || maxShows)-1].overview"
                         :class-status="'opacity-50 absolute -left-60'"
                     />
                     <CommonCarouselCard
@@ -24,13 +24,13 @@
                         :class-status="'opacity-100'"
                     />
                     <CommonCarouselCard
-                        :url="'/movies/' + nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].id"
-                        :rate="nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].vote_average?.toFixed(1)"
-                        :genres="nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1]?.genre_ids?.map(genre => categories?.genres?.find(category => genre === category.id)?.name)[0]"
-                        :poster-url="'https://image.tmdb.org/t/p/original' + nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].poster_path"
-                        :title="nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].title"
-                        :release-year="nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].release_date.substring(0, 4)"
-                        :overview="nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].overview"
+                        :url="'/movies/' + nowPlaying.results[index + 1 === maxShows ? 0 : index + 1].id"
+                        :rate="nowPlaying.results[index + 1 === maxShows ? 0 : index + 1].vote_average?.toFixed(1)"
+                        :genres="nowPlaying.results[index + 1 === maxShows ? 0 : index + 1]?.genre_ids?.map(genre => categories?.genres?.find(category => genre === category.id)?.name)[0]"
+                        :poster-url="'https://image.tmdb.org/t/p/original' + nowPlaying.results[index + 1 === maxShows ? 0 : index + 1].poster_path"
+                        :title="nowPlaying.results[index + 1 === maxShows ? 0 : index + 1].title"
+                        :release-year="nowPlaying.results[index + 1 === maxShows ? 0 : index + 1].release_date.substring(0, 4)"
+                        :overview="nowPlaying.results[index + 1 === maxShows ? 0 : index + 1].overview"
                         :class-status="'opacity-50 absolute -right-60'"
                     />
                 </template>
@@ -38,23 +38,27 @@
         </div>
         <div class="flex gap-4 mt-12 justify-center">
             <template v-for="(item, index) in nowPlaying.results">
-                <div
-                    class="h-[12px] rounded-[6px] cursor-pointer transition-all duration-300"
-                    :style="index === active ? { 
-                        backgroundColor: '#E74C3C', 
-                        width: '60px' 
-                    } : { 
-                        backgroundColor: 'rgba(255,255,255,0.5)', 
-                        width: '12px' 
-                    }"
-                    @click="() => setActive(index)"
-                ></div>
+                <template v-if="index < maxShows">
+                    <div
+                        class="h-[12px] rounded-[6px] cursor-pointer transition-all duration-300"
+                        :style="index === active ? { 
+                            backgroundColor: '#E74C3C', 
+                            width: '60px' 
+                        } : { 
+                            backgroundColor: 'rgba(255,255,255,0.5)', 
+                            width: '12px' 
+                        }"
+                        @click="() => setActive(index)"
+                    ></div>
+                </template>
             </template>
         </div>
     </section>
 </template>
 
 <script setup>
+const maxShows = 5
+
 const active = useState('active', () => 0)
 const setActive = (index) => {
     active.value = index
