@@ -1,18 +1,8 @@
 <template>
     <section class="pt-14 pb-12">
-        <div class="gap-8 flex justify-center relative w-[1200px] mx-auto">
-            <template v-for="(item, index) in nowPlaying.results">
-                <template v-if="index === active">
-                    <CommonCarouselCard
-                        :url="'/movies/' + nowPlaying.results[(index || maxShows)-1].id"
-                        :rate="nowPlaying.results[(index || maxShows)-1].vote_average?.toFixed(1)"
-                        :genres="nowPlaying.results[(index || maxShows)-1]?.genre_ids?.map(genre => categories?.genres?.find(category => genre === category.id)?.name)?.join(', ')"
-                        :poster-url="'https://image.tmdb.org/t/p/original' + nowPlaying.results[(index || maxShows)-1].poster_path"
-                        :title="nowPlaying.results[(index || maxShows)-1].title"
-                        :release-year="nowPlaying.results[(index || maxShows)-1].release_date.substring(0, 4)"
-                        :overview="nowPlaying.results[(index || maxShows)-1].overview"
-                        :class-status="'opacity-50 absolute -left-60'"
-                    />
+        <Carousel :items-to-show="2.5" :wrap-around="true">
+            <Slide v-for="(item, index) in nowPlaying.results.filter((item, index) => index < maxShows)" :key="index">
+                <div class="carousel__item">
                     <CommonCarouselCard
                         :url="'/movies/' + item.id"
                         :rate="item.vote_average?.toFixed(1)"
@@ -21,42 +11,19 @@
                         :title="item.title"
                         :release-year="item.release_date.substring(0, 4)"
                         :overview="item.overview"
-                        :class-status="'opacity-100'"
                     />
-                    <CommonCarouselCard
-                        :url="'/movies/' + nowPlaying.results[index + 1 === maxShows ? 0 : index + 1].id"
-                        :rate="nowPlaying.results[index + 1 === maxShows ? 0 : index + 1].vote_average?.toFixed(1)"
-                        :genres="nowPlaying.results[index + 1 === maxShows ? 0 : index + 1]?.genre_ids?.map(genre => categories?.genres?.find(category => genre === category.id)?.name)?.join(', ')"
-                        :poster-url="'https://image.tmdb.org/t/p/original' + nowPlaying.results[index + 1 === maxShows ? 0 : index + 1].poster_path"
-                        :title="nowPlaying.results[index + 1 === maxShows ? 0 : index + 1].title"
-                        :release-year="nowPlaying.results[index + 1 === maxShows ? 0 : index + 1].release_date.substring(0, 4)"
-                        :overview="nowPlaying.results[index + 1 === maxShows ? 0 : index + 1].overview"
-                        :class-status="'opacity-50 absolute -right-60'"
-                    />
-                </template>
+                </div>
+            </Slide>
+            <template #addons>
+                <Pagination />
             </template>
-        </div>
-        <div class="flex gap-4 mt-12 justify-center">
-            <template v-for="(item, index) in nowPlaying.results">
-                <template v-if="index < maxShows">
-                    <div
-                        class="h-[12px] rounded-[6px] cursor-pointer transition-all duration-300"
-                        :style="index === active ? { 
-                            backgroundColor: '#E74C3C', 
-                            width: '60px' 
-                        } : { 
-                            backgroundColor: 'rgba(255,255,255,0.5)', 
-                            width: '12px' 
-                        }"
-                        @click="() => setActive(index)"
-                    ></div>
-                </template>
-            </template>
-        </div>
+        </Carousel>
     </section>
 </template>
 
 <script setup>
+import 'vue3-carousel/dist/carousel.css'
+
 const maxShows = 5
 
 const active = useState('active', () => 0)
@@ -79,3 +46,38 @@ const { data: nowPlaying, error } = await useAsyncData(
     })
 )
 </script>
+
+<style scoped>
+.carousel__slide {
+  padding: 20px;
+  opacity: 0.5;
+}
+
+.carousel__slide--active {
+    opacity: 1;
+}
+
+.carousel__pagination {
+    margin-top: 52px;
+    gap: 1rem;
+}
+
+.carousel__pagination :deep(.carousel__pagination-button) {
+    padding: 0;
+}
+
+.carousel__pagination :deep(.carousel__pagination-button::after) {
+    background-color: rgba(255,255,255,0.5);
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}
+
+.carousel__pagination :deep(.carousel__pagination-button--active::after) {
+    background-color: #E74C3C;
+    width: 60px;
+}
+</style>
