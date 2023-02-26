@@ -8,13 +8,13 @@
             <p class="flex gap-1.5 text-lg font-bold"><img src="/images/star.svg" alt="Rating" class="w-[16px]">
                 <span>{{ rate }}</span>
             </p>
-            <h3 class="text-3xl font-semibold max-h-[108px] overflow-hidden">{{ title }}</h3>
+            <h3 class="text-3xl font-semibold max-h-[72px] line-clamp-[2]" :title="title">{{ title }}</h3>
             <div class="flex gap-1.5 items-center py-3">
                 <span>{{ releaseYear }}</span>
                 <div class="w-[7px] h-[7px] rounded-full bg-[rgba(255,255,255,0.5)]"></div>
-                <span>{{ genres }}</span>
+                <span class="h-[24px] line-clamp-1" :title="genres">{{ genres }}</span>
             </div>
-            <p class="w-[240px] h-[107px] text-[12px] overflow-hidden">{{ overview }}</p>
+            <p class="w-[240px] h-[107px] text-[12px] line-clamp-[6]" :title="overview">{{ overview }}</p>
         </div>
     </NuxtLink>
 </template>
