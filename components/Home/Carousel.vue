@@ -1,6 +1,6 @@
 <template>
     <section class="pt-14 pb-12">
-        <Carousel :items-to-show="2.5" :wrap-around="true">
+        <Carousel :items-to-show="2.5" :wrap-around="true" :autoplay="3000">
             <Slide v-for="(item, index) in nowPlaying.results.filter((item, index) => index < maxShows)" :key="index">
                 <div class="carousel__item">
                     <CommonCarouselCard
