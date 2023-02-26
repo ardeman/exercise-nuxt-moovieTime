@@ -1,59 +1,77 @@
 <template>
     <section class="pt-14 pb-12">
-        <div class="flex justify-between gap-8 mx-[-145px]">
-            <div :class="'bg-black w-[520px] h-[328px] flex gap-6 ' + (item.active ? 'opacity-100' : 'opacity-50')" v-for="item in data">
-                <img :src="item.img" alt="News World" class="my-[-20px] ml-[-20px]">
-                <div class="pt-6 pr-9">
-                    <p class="flex gap-1.5 text-lg font-bold"><img src="/images/star.svg" alt="Rating" class="w-[16px]">
-                        <span>{{ item.rating }}</span>
-                    </p>
-                    <h3 class="text-3xl font-semibold">{{ item.title }}</h3>
-                    <div class="flex gap-1.5 items-center py-3">
-                        <span>{{ item.year }}</span>
-                        <div class="w-[7px] h-[7px] rounded-full bg-[rgba(255,255,255,0.5)]"></div>
-                        <span>{{ item.genre }}</span>
-                    </div>
-                    <p class="w-[240px] h-[107px] text-[12px]">{{ item.description }}</p>
-                </div>
-            </div>
+        <div class="gap-8 flex justify-center relative w-[1200px] mx-auto">
+            <template v-for="(item, index) in nowPlaying.results">
+                <template v-if="index === active">
+                    <CommonCarouselCard
+                        :url="'/movies/' + nowPlaying.results[(index || nowPlaying.results.length)-1].id"
+                        :rate="nowPlaying.results[(index || nowPlaying.results.length)-1].vote_average?.toFixed(1)"
+                        :genres="nowPlaying.results[(index || nowPlaying.results.length)-1]?.genre_ids?.find((item, index) => index === 0).name"
+                        :poster-url="'https://image.tmdb.org/t/p/original' + nowPlaying.results[(index || nowPlaying.results.length)-1].poster_path"
+                        :title="nowPlaying.results[(index || nowPlaying.results.length)-1].title"
+                        :release-year="nowPlaying.results[(index || nowPlaying.results.length)-1].release_date.substring(0, 4)"
+                        :overview="nowPlaying.results[(index || nowPlaying.results.length)-1].overview"
+                        :class-status="'opacity-50 absolute -left-60'"
+                    />
+                    <CommonCarouselCard
+                        :url="'/movies/' + item.id"
+                        :rate="item.vote_average?.toFixed(1)"
+                        :genres="item?.genre_ids?.find((item, index) => index === 0).name"
+                        :poster-url="'https://image.tmdb.org/t/p/original' + item.poster_path"
+                        :title="item.title"
+                        :release-year="item.release_date.substring(0, 4)"
+                        :overview="item.overview"
+                        :class-status="'opacity-100'"
+                    />
+                    <CommonCarouselCard
+                        :url="'/movies/' + nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].id"
+                        :rate="nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].vote_average?.toFixed(1)"
+                        :genres="nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1]?.genre_ids?.find((item, index) => index === 0).name"
+                        :poster-url="'https://image.tmdb.org/t/p/original' + nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].poster_path"
+                        :title="nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].title"
+                        :release-year="nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].release_date.substring(0, 4)"
+                        :overview="nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].overview"
+                        :class-status="'opacity-50 absolute -right-60'"
+                    />
+                </template>
+            </template>
         </div>
         <div class="flex gap-4 mt-12 justify-center">
-            <div class="w-[60px] h-[12px] rounded-[6px] bg-[#E74C3C]"></div>
-            <div class="w-[12px] h-[12px] rounded-[6px] bg-[rgba(255,255,255,0.5)]"></div>
-            <div class="w-[12px] h-[12px] rounded-[6px] bg-[rgba(255,255,255,0.5)]"></div>
-            <div class="w-[12px] h-[12px] rounded-[6px] bg-[rgba(255,255,255,0.5)]"></div>
+            <template v-for="(item, index) in nowPlaying.results">
+                <div
+                    class="h-[12px] rounded-[6px] cursor-pointer transition-all duration-300"
+                    :style="index === active ? { 
+                        backgroundColor: '#E74C3C', 
+                        width: '60px' 
+                    } : { 
+                        backgroundColor: 'rgba(255,255,255,0.5)', 
+                        width: '12px' 
+                    }"
+                    @click="() => setActive(index)"
+                ></div>
+            </template>
         </div>
     </section>
 </template>
 
 <script setup>
-const data = [
-    {
-        active: false,
-        img: '/images/dummy/news-of-the-world.jpg',
-        rating: '7.2',
-        title: 'News of the World',
-        year: '2021',
-        genre: 'Drama',
-        description: "A Texan traveling across the wild West bringing the news of the world to local townspeople, agrees to help rescue a young girl who was kidnapped."
-    },
-    {
-        active: true,
-        img: '/images/dummy/space-sweepers.jpg',
-        rating: '7.3',
-        title: 'Space Sweepers',
-        year: '2021',
-        genre: 'Sci-Fi',
-        description: "When the crew of a space junk collector ship called The Victory discovers a humanoid robot named Dorothy that's known to be a weapon of mass destruction, they get involved in a risky business deal which puts their lives at stake."
-    },
-    {
-        active: false,
-        img: '/images/dummy/to-all-the-boys.jpg',
-        rating: '8.1',
-        title: 'To All the Boys: Always and Forever',
-        year: '2021',
-        genre: 'Drama',
-        description: "Senior year of high school takes center stage as Lara Jean returns from a family trip to Korea and considers her college plans — with and without Peter."
-    },
-]
+const active = useState('active', () => 0)
+const setActive = (index) => {
+    active.value = index
+}
+
+const { categories } = useCategories()
+const appConfig = useAppConfig()
+
+const { data: nowPlaying, error } = await useAsyncData(
+    'nowPlaying',
+    () => $fetch(`/movie/now_playing`, {
+        method: 'GET',
+        baseURL: 'https://api.themoviedb.org/3',
+        params: {
+            api_key: appConfig.apiKey.tmdb,
+            page: 1
+        }
+    })
+)
 </script>

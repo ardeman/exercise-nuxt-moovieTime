@@ -14,7 +14,6 @@
 import { onMounted } from 'vue'
 import { 
     // initAccordions, 
-    // initCarousels, 
     // initCollapses, 
     // initDials, 
     // initDismisses, 
@@ -29,7 +28,6 @@ import {
 // initialize components based on data attribute selectors
 onMounted(() => {
     // initAccordions();
-    // initCarousels();
     // initCollapses();
     // initDials();
     // initDismisses();
