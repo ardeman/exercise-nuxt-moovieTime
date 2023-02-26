@@ -6,7 +6,7 @@
                     <CommonCarouselCard
                         :url="'/movies/' + nowPlaying.results[(index || nowPlaying.results.length)-1].id"
                         :rate="nowPlaying.results[(index || nowPlaying.results.length)-1].vote_average?.toFixed(1)"
-                        :genres="nowPlaying.results[(index || nowPlaying.results.length)-1]?.genre_ids?.find((item, index) => index === 0).name"
+                        :genres="nowPlaying.results[(index || nowPlaying.results.length)-1]?.genre_ids?.map(genre => categories?.genres?.find(category => genre === category.id)?.name)[0]"
                         :poster-url="'https://image.tmdb.org/t/p/original' + nowPlaying.results[(index || nowPlaying.results.length)-1].poster_path"
                         :title="nowPlaying.results[(index || nowPlaying.results.length)-1].title"
                         :release-year="nowPlaying.results[(index || nowPlaying.results.length)-1].release_date.substring(0, 4)"
@@ -16,7 +16,7 @@
                     <CommonCarouselCard
                         :url="'/movies/' + item.id"
                         :rate="item.vote_average?.toFixed(1)"
-                        :genres="item?.genre_ids?.find((item, index) => index === 0).name"
+                        :genres="item?.genre_ids?.map(genre => categories?.genres?.find(category => genre === category.id)?.name)[0]"
                         :poster-url="'https://image.tmdb.org/t/p/original' + item.poster_path"
                         :title="item.title"
                         :release-year="item.release_date.substring(0, 4)"
@@ -26,7 +26,7 @@
                     <CommonCarouselCard
                         :url="'/movies/' + nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].id"
                         :rate="nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].vote_average?.toFixed(1)"
-                        :genres="nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1]?.genre_ids?.find((item, index) => index === 0).name"
+                        :genres="nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1]?.genre_ids?.map(genre => categories?.genres?.find(category => genre === category.id)?.name)[0]"
                         :poster-url="'https://image.tmdb.org/t/p/original' + nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].poster_path"
                         :title="nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].title"
                         :release-year="nowPlaying.results[index + 1 === nowPlaying.results.length ? 0 : index + 1].release_date.substring(0, 4)"
