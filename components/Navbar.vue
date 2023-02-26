@@ -72,9 +72,9 @@ const { data: search, error } = await useAsyncData(
             page: 1
         }
     }), {
-    watch: [
-        query
-    ]
-}
+        watch: [
+            query
+        ]
+    }
 )
 </script>

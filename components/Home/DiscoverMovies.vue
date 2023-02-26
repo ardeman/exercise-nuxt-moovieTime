@@ -7,12 +7,18 @@
                     <span class="text-2xl">Discover Movies</span>
                 </CommonTitle>
                 <div class="flex gap-5">
-                    <button class="rounded-[32px] px-4 py-2 text-sm bg-[#FF0000]">Popularity</button>
-                    <button class="rounded-[32px] px-4 py-2 text-sm bg-[rgba(0,0,0,0.2)]">Release Date</button>
+                    <template v-for="(item, index) in groupItems">
+                        <button 
+                            :class="'rounded-[32px] px-4 py-2 text-sm ' + (index === activeGroup ? 'bg-[#FF0000]' : 'bg-[rgba(0,0,0,0.2)]')"
+                            @click="() => setActiveGroup(index)"
+                        >
+                            {{ item.label }}
+                        </button>
+                    </template>
                 </div>
             </div>
             <div class="grid grid-cols-5 gap-[25px]">
-                <template v-for="(movie, index) in popular.results">
+                <template v-for="(movie, index) in popular?.results">
                     <CommonPoster
                         v-if="index < 10"
                         :url="'/movies/' + movie.id"
@@ -32,15 +38,35 @@
 const { categories } = useCategories()
 const appConfig = useAppConfig()
 
+const activeGroup = useState('activeGroup', () => 0)
+const setActiveGroup = (index) => {
+    activeGroup.value = index
+}
+
+const groupItems = [
+    {
+        label: "Popularity",
+        path: "popular"
+    },
+    {
+        label: "Upcoming",
+        path: "upcoming"
+    },
+]
+
 const { data: popular, error } = await useAsyncData(
     'popular',
-    () => $fetch(`/movie/popular`, {
+    () => $fetch(`/movie/${groupItems[activeGroup.value].path}`, {
         method: 'GET',
         baseURL: 'https://api.themoviedb.org/3',
         params: {
             api_key: appConfig.apiKey.tmdb,
             page: 1
         }
-    })
+    }), {
+        watch: [
+            activeGroup
+        ]
+    }
 )
 </script>
