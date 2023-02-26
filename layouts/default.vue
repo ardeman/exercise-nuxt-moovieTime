@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-[#1E232B] text-white min-h-screen flex flex-col justify-between relative">
+    <div class="bg-[#1E232B] text-white min-h-screen flex flex-col justify-between relative overflow-x-hidden">
         <div class="relative">
             <Navbar />
             <div class="pt-[74px]">
