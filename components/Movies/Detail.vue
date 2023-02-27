@@ -22,7 +22,7 @@
                     <div class="flex gap-3 pl-[253px] py-[20px]">
                         <div class="flex gap-4 items-center flex-shrink-0">
                             <img src="/images/star.svg" alt="Rating" class="w-[32px] h-[32px]">
-                            <p class="text-4xl font-semibold">{{ details.vote_average?.toFixed(1) }}</p>
+                            <p class="text-4xl font-semibold">{{ details.vote_average ? details.vote_average.toFixed(1) : 'N/A' }}</p>
                         </div>
                         <div class="flex text-xs items-center">
                             <div class="mr-6 pr-6 border-r border-[rgba(255,255,255,0.2)] flex-shrink-0">

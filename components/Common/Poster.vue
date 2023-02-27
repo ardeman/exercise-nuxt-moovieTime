@@ -2,12 +2,12 @@
     <NuxtLink :to="url" class="text-[#E5E5E5]">
         <div class="relative bg-[rgba(255,255,255,0.1)">
             <div class="absolute top-0 right-0 text-lg font-bold px-2.5 py-1.5 bg-[rgba(30,35,43,0.8)]">
-                {{ rate }}
+                {{ rate !== '0.0' ? rate : 'N/A' }}
             </div>
             <div
                 class="w-full h-full absolute bg-[rgba(0,0,0,0.8)] hover:opacity-100 opacity-0 flex flex-col items-center justify-center gap-11 font-semibold">
                 <p class="flex gap-2.5 text-2xl"><img src="/images/star.svg" alt="Rating" class="w-[32px]">
-                    <span>{{ rate }}</span>
+                    <span>{{ rate !== '0.0' ? rate : 'N/A' }}</span>
                 </p>
                 <p class="text-center px-3 text-lg"
                     v-text="genres">
